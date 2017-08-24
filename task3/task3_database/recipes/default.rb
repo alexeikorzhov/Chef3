@@ -30,4 +30,6 @@ bash 'create database' do
   code <<-SHELL  
   mysql -S /var/run/mysql-default/mysqld.sock -uroot -p12345678 -e "create database task3 character set utf8 collate utf8_bin;"  
   SHELL
+  action :run  
+  not_if "mysql -S /var/run/mysql-default/mysqld.sock -uroot -p12345678 -e 'show databases' | grep task3"
 end
